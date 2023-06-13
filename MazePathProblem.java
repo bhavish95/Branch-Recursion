@@ -1,39 +1,22 @@
-import java.util.ArrayList;
-//Another way for MazPath Problem
-public class MazePathProblem {
+// void mazePathProblem(int row , int col, int endRow, int endCol, String result)
+// Step - 1 Move to the Right
+// Step-2 Move to the Down
 
-    static ArrayList<String> getMazePos(int currentRow , int currentCol, int endRow, int endCol){
-        
-        // Termination Case (Positive Case and Negative Case)
-        // Positive Case
-        if(currentCol == endCol && currentRow == endRow){
-            ArrayList<String> result = new ArrayList<>();
-            result.add("");
-            return result;
-        }
-        // Negative Case
-        if(currentCol>endCol || currentRow>endRow){
-            ArrayList<String> result = new ArrayList<>();
-            return result;
-        }
-        
-        // All the Right and Down Result Store in Final Result
-        ArrayList<String> finalResult = new ArrayList<>();
-        // Move to the Right
-        ArrayList<String> rightResult = getMazePos(currentRow, currentCol+1, endRow, endCol);
-        for(String t : rightResult){
-            finalResult.add("R"+ t);
-        }
-        // On BackTrack so we have another choice (Makes Branch)
-        // Move to the Down
-        ArrayList<String> downResult = getMazePos(currentRow+1, currentCol, endRow, endCol);
-        for(String t : downResult){
-            finalResult.add("D"+ t);
-        }
-        return finalResult;
-    }
-    public static void main(String[] args) {
-        ArrayList<String> result = getMazePos(0, 0, 2, 2);
-        System.out.println(result);
-    }
+public class MazePathGame {
+
+	private static void mazePath(int row, int col, int endRow, int endCol, String res) {
+		if(row == endRow && col == endCol) {
+			System.out.println(res);
+			return;
+		}
+		if(row > endRow || col > endCol) {
+			return;
+		}
+		mazePath(row, col+1,endRow, endCol, res+"R");
+		mazePath(row+1, col,endRow, endCol, res+"D");
+	}
+	public static void main(String[] args) {
+		mazePath(0, 0, 2, 2, "");
+	}
+
 }
