@@ -1,19 +1,20 @@
+// e.g void perm (String str, String result){
+// }
+
 public class PERMUTATION_0F_STRING {
-    public static void main(String[] args) {
-        String input = "abc";
-        perm(input, "");
-    }
 
-    static void perm(String str, String result) {
-        if (str.isEmpty()) {
-            System.out.println(result);
-            return;
-        }
+	private static void permutation(String str, String res) {
+		if(str.length() == 0) {
+			System.out.println("Result : "+res);
+			return;
+		}
+		char firstChar = str.charAt(0);
+		String smallString = str.substring(1);
+		permutation(smallString, firstChar+res);
+		permutation(smallString, res+firstChar);
+	}
+	public static void main(String[] args) {
+		permutation("abc","");
+	}
 
-        for (int i = 0; i < str.length(); i++) {
-            char currentChar = str.charAt(i);
-            String newStr = str.substring(0, i) + str.substring(i + 1);
-            perm(newStr, result + currentChar);
-        }
-    }
 }
